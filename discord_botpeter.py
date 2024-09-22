@@ -1,8 +1,8 @@
 import discord
-from logika_bota import gen_pass, gena, genadiy, genka
-#from logika_bota import gena
-#from logika_bota import genadiy 
-#from logika_bota import genka 
+from logika_bota import gen_pass
+from logika_bota import gena
+from logika_bota import genadiy 
+from logika_bota import genka 
 # Переменная intents - хранит привилегии бота
 intents = discord.Intents.default()
 # Включаем привелегию на чтение сообщений
@@ -25,59 +25,20 @@ async def on_message(message):
     elif message.content.startswith('Как дела?'):
         await message.channel.send("Круто, работаю!")
     elif "Бот" in message.content:
-        await message.channel.send("Опять я :( ")    
-    elif "Сделай мне пароль" in message.content:
-       await message.channel.send(genka(8)) 
-    elif "Сделай мне пароль из букв" in message.content:
+        await message.channel.send("Опять я :( ")       
+    elif "пароль из букв" in message.content:
+       print("буквы")
        await message.channel.send(gena(8)) 
-    elif "Замути мне пароль из цифр" in message.content:
+    elif "пароль из цифр" in message.content:
+       print("цифры")
        await message.channel.send(genadiy(8)) 
-    elif "Сделай мне пароль из символов" in message.content:
+    elif "пароль из символов" in message.content:
+       print("символы")
        await message.channel.send(gen_pass(8))
+    elif "пароль" in message.content:
+       print("всё")
+       await message.channel.send(genka(8))   
     else:
-        await message.channel.send(message.content)
+       await message.channel.send(message.content)
 
-    
-    
 client.run("")
-
-
-
-#2 Часть logika_bota
-import random
-
-def gen_pass(pass_length):
-    elements = "+-/*!&$#?=@<>"
-    password = ""
-    for i in range(pass_length):
-        password += random.choice(elements)
-    return password
-#print("Приветсвую, это программа для регенирации паролей")
-
-
-
-
-#сделать просто функцию 
-def gena(pass_length):
-    
-    letter = "abcdefghijklnopqrstuvwxyz"
-    password = ""
-    for i in range(pass_length):
-        password += random.choice(letter)
-    return password
-
-def genadiy(pass_length):
-    
-    numbers = "1234567890"
-    password = ""
-    for i in range(pass_length):
-        password += random.choice(numbers)
-    return password
-
-def genka(pass_length):
-    
-    mix = "+-/*!&$#?=@abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-    password = ""
-    for i in range(pass_length):
-        password += random.choice(mix)
-    return password
